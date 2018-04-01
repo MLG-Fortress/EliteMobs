@@ -601,5 +601,4 @@ public class DamageAdjuster implements Listener {
 
     }
 
-
 }
