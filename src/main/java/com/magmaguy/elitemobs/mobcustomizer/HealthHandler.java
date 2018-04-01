@@ -18,6 +18,9 @@ package com.magmaguy.elitemobs.mobcustomizer;
 import com.magmaguy.elitemobs.MetadataHandler;
 import com.magmaguy.elitemobs.config.ConfigValues;
 import com.magmaguy.elitemobs.config.MobCombatSettingsConfig;
+import com.robomwm.elitemobs.DoNotSetHealthPlayers;
+import com.robomwm.elitemobs.events.EliteMobsSetHealthEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -58,10 +61,12 @@ public class HealthHandler {
 
         if (damageableEntity.getHealth() + damageableDeleted.getHealth() > damageableEntity.getMaxHealth()) {
 
+            if (!DoNotSetHealthPlayers.isEvilAndLazyAction(damageableEntity, damageableEntity.getMaxHealth())) //this method is probably only called on a mob spawn but just in case
             damageableEntity.setHealth(damageableEntity.getMaxHealth());
 
         } else {
 
+            if (!DoNotSetHealthPlayers.isEvilAndLazyAction(damageableEntity, damageableEntity.getHealth() + damageableDeleted.getHealth()))
             damageableEntity.setHealth(damageableEntity.getHealth() + damageableDeleted.getHealth());
 
         }

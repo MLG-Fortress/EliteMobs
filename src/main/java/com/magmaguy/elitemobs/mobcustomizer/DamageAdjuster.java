@@ -20,6 +20,7 @@ import com.magmaguy.elitemobs.collateralminecraftchanges.PlayerDeathMessageByEli
 import com.magmaguy.elitemobs.config.ConfigValues;
 import com.magmaguy.elitemobs.config.MobCombatSettingsConfig;
 import com.magmaguy.elitemobs.mobcustomizer.displays.DamageDisplay;
+import com.robomwm.elitemobs.DoNotSetHealthPlayers;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
@@ -586,10 +587,12 @@ public class DamageAdjuster implements Listener {
 
         if (damageEntity.getHealth() - rawDamage < 0) {
 
+            if (!DoNotSetHealthPlayers.isEvilAndLazyAction(damageEntity, 0))
             damageEntity.setHealth(0);
 
         } else {
 
+            if (!DoNotSetHealthPlayers.isEvilAndLazyAction(damageEntity, damageEntity.getHealth() - rawDamage))
             damageEntity.setHealth(damageEntity.getHealth() - rawDamage);
 
         }
