@@ -163,7 +163,7 @@ public class DamageAdjuster implements Listener {
 
         Player player = (Player) event.getEntity();
 
-        if (event.getEntity() instanceof LivingEntity && damageeList.contains(event.getEntity())) {
+        if (event.getEntity() instanceof LivingEntity && damageeList.contains(event.getEntity()) && false) {
 
             event.setCancelled(true);
             damageeList.remove(event.getEntity());
@@ -196,7 +196,9 @@ public class DamageAdjuster implements Listener {
 
         customDamageEvent(livingEntity, player, EntityDamageEvent.DamageCause.ENTITY_ATTACK, newDamage);
 
-        event.setDamage(0);
+        for (EntityDamageEvent.DamageModifier modifier : EntityDamageEvent.DamageModifier.values())
+            event.setDamage(modifier, 0);
+        event.setDamage(EntityDamageEvent.DamageModifier.BASE, newDamage);
 
     }
 
