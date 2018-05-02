@@ -197,7 +197,8 @@ public class DamageAdjuster implements Listener {
         //customDamageEvent(livingEntity, player, EntityDamageEvent.DamageCause.ENTITY_ATTACK, newDamage);
 
         for (EntityDamageEvent.DamageModifier modifier : EntityDamageEvent.DamageModifier.values())
-            event.setDamage(modifier, 0);
+            if (event.isApplicable(modifier))
+                event.setDamage(modifier, 0);
         event.setDamage(EntityDamageEvent.DamageModifier.BASE, newDamage);
 
     }
